@@ -4,22 +4,43 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
-    private Color red = new Color(1, 0, 0);
-    private Color green = new Color(0, 1, 0);
-    private Color blue = new Color(0, 0, 1);
+    private Color red;
+    private Color green;
+    private Color blue;
 
-    private Color darkGreen = new Color(0, 0.5f, 0);
-    private Color purple = new Color(0.5f, 0, 0.5f);
-    private Color yellow = new Color(1, 1, 0);
-    private Color orange = new Color(1, 0.5f, 0);
+    private Color darkGreen;
+    private Color purple;
+    private Color yellow;
+    private Color orange;
+
+    private static ColorManager colorManager;
+
+    private void Awake()
+    {
+        if (colorManager == null)
+        {
+            colorManager = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+
+        red = new Color(1, 0, 0);
+        green = new Color(0, 1, 0);
+        blue = new Color(0, 0, 1);
+
+        darkGreen = new Color(0, 0.5f, 0);
+        purple = new Color(0.5f, 0, 0.5f);
+        yellow = new Color(1, 1, 0);
+        orange = new Color(1, 0.5f, 0);
+    }
 
     public Color CombineColors(Color color1, Color color2)
     {
         color1 = RoundColorValues(color1);
         color2 = RoundColorValues(color2);
-
-        Debug.Log("color1: " + color1);
-        Debug.Log("color2: " + color2);
 
         List<Color> colorList = new List<Color>();
         colorList.Add(color1);

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     [SerializeField] private float pullPlayerTime = 1.25f;
+    [SerializeField] private bool isResetTrigger = false;
 
     private bool isPullingPlayer = false;
     private bool isActivated = true;
@@ -43,15 +44,32 @@ public class Trigger : MonoBehaviour
         player.canMove = false;
         isPullingPlayer = true;
         yield return new WaitForSeconds(pullPlayerTime);
-        player.GetComponent<SpriteRenderer>().color = colorManager.CombineColors(player.spriteRenderer.color, color);
+        if (isResetTrigger)
+        {
+            player.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else if (player.spriteRenderer.color == color) 
+        {
+            FreeThePlayer();
+            yield break;
+        }
+        else
+        {
+            player.GetComponent<SpriteRenderer>().color = colorManager.CombineColors(player.spriteRenderer.color, color);
+        }
         Deactivate();
     }
 
     private void Deactivate()
     {
-        isPullingPlayer = false;
+        FreeThePlayer();
         isActivated = false;
-        player.canMove = true;
         GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    private void FreeThePlayer()
+    {
+        isPullingPlayer = false;
+        player.canMove = true;
     }
 }
