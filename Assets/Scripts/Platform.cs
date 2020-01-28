@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+public class Platform : MonoBehaviour
 {
     [SerializeField] private Vector2 startPos = new Vector2(0, 0);
     [SerializeField] private Vector2 endPos = new Vector2(0, 0);
@@ -37,24 +37,6 @@ public class Trap : MonoBehaviour
         else 
         {
             transform.position = Vector2.MoveTowards(transform.position, startPos, Time.fixedDeltaTime * speed);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.tag == "Player")
-        {
-            GameObject player = col.gameObject;
-            SpriteRenderer playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
-            if (color == colorManager.white)
-            {
-                playerSpriteRenderer.color = colorManager.white;
-            }
-            else 
-            {
-                playerSpriteRenderer.color = colorManager.CombineColors(playerSpriteRenderer.color, color);
-            }
-            Destroy(gameObject);
         }
     }
 }

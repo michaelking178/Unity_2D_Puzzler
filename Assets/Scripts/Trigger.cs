@@ -44,14 +44,14 @@ public class Trigger : MonoBehaviour
         player.canMove = false;
         isPullingPlayer = true;
         yield return new WaitForSeconds(pullPlayerTime);
-        if (isResetTrigger)
-        {
-            player.GetComponent<SpriteRenderer>().color = Color.white;
-        }
-        else if (player.spriteRenderer.color == color) 
+        if (player.spriteRenderer.color == color) 
         {
             FreeThePlayer();
             yield break;
+        }
+        else if (isResetTrigger)
+        {
+            player.GetComponent<SpriteRenderer>().color = Color.white;
         }
         else
         {

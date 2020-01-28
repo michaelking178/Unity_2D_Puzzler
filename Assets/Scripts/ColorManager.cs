@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
-    private Color red;
-    private Color green;
-    private Color blue;
+    public readonly Color white = new Color(1, 1, 1);
+    public readonly Color red = new Color(1, 0, 0);
+    public readonly Color green = new Color(0, 1, 0);
+    public readonly Color blue = new Color(0, 0, 1);
 
-    private Color darkGreen;
-    private Color purple;
-    private Color yellow;
-    private Color orange;
+    public readonly Color darkGreen = new Color(0, 0.5f, 0);
+    public readonly Color purple = new Color(0.5f, 0, 0.5f);
+    public readonly Color yellow = new Color(1, 1, 0);
+    public readonly Color orange = new Color(1, 0.5f, 0);
 
     private static ColorManager colorManager;
 
@@ -26,15 +27,6 @@ public class ColorManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-
-        red = new Color(1, 0, 0);
-        green = new Color(0, 1, 0);
-        blue = new Color(0, 0, 1);
-
-        darkGreen = new Color(0, 0.5f, 0);
-        purple = new Color(0.5f, 0, 0.5f);
-        yellow = new Color(1, 1, 0);
-        orange = new Color(1, 0.5f, 0);
     }
 
     public Color CombineColors(Color color1, Color color2)
@@ -96,7 +88,18 @@ RED: 1, 0, 0
 GREEN: 0, 1, 0
 BLUE: 0, 0, 1
 
-PURPLE: 0.5, 0, 0.5
+CYAN:
+MAGENTA:
 YELLOW: 1, 1, 0
+
+PURPLE: 0.5, 0, 0.5
+
+
+
+COLOR COMBINATIONS
+
+RED + BLUE == PURPLE
+RED + YELLOW == ORANGE
+BLUE + YELLOW == DARKGREEN
 
 */
