@@ -45,5 +45,6 @@ public class Door : MonoBehaviour
         yield return new WaitForSeconds(doorOpenDelay);
         player.canMove = true;
         isUnlocking = false;
+        Destroy(gameObject);
     }
 }
