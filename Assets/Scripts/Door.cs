@@ -40,10 +40,10 @@ public class Door : MonoBehaviour
 
     private IEnumerator Unlock()
     {
-        player.canMove = false;
+        player.canControlMovement = false;
         isUnlocking = true;
         yield return new WaitForSeconds(doorOpenDelay);
-        player.canMove = true;
+        player.canControlMovement = true;
         isUnlocking = false;
         Destroy(gameObject);
     }

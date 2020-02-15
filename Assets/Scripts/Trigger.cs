@@ -41,7 +41,7 @@ public class Trigger : MonoBehaviour
 
     private IEnumerator PullPlayer()
     {
-        player.canMove = false;
+        player.canControlMovement = false;
         isPullingPlayer = true;
         yield return new WaitForSeconds(pullPlayerTime);
         if (player.spriteRenderer.color == color) 
@@ -70,6 +70,6 @@ public class Trigger : MonoBehaviour
     private void FreeThePlayer()
     {
         isPullingPlayer = false;
-        player.canMove = true;
+        player.canControlMovement = true;
     }
 }

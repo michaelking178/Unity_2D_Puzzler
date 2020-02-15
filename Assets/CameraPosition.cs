@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class CameraPosition : MonoBehaviour
 {
-    [SerializeField] private Vector3 destination = new Vector3(0, 0, 0);
     [SerializeField] float speed = 3f;
+    private Vector3 destination;
 
-    [HideInInspector] public bool isTransitioning = false;
+    void Start()
+    {
+        destination = transform.position;
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isTransitioning)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed);
-        }
+        transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed);
+    }
+
+    public void SetDestination(Vector3 dest)
+    {
+        destination = dest;
     }
 }

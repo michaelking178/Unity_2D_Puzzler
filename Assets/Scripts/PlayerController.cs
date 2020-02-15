@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector] public bool canMove = true;
+    [HideInInspector] public bool canControlMovement = true;
     [HideInInspector] public SpriteRenderer spriteRenderer;
-    public float speed = 1f;
+    public float speed = 5f;
 
     [SerializeField] private float raycastDistance = 1.1f;
     
     private Vector2 raycastOffset = new Vector2(0.5f, -0.5f);
     private RaycastHit2D hit;
     private ColorManager colorManager;
+    private bool isBeingMoved = false;
+    private Vector2 direction;
+    private float transitionSpeed = 2f; // For hallway transitions
     
-
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,7 +26,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MovementInput();
+        if (canControlMovement)
+        {
+            MovementInput();
+        }
+        else if (isBeingMoved)
+        {
+            Move(direction);
+        }
         
         if (Input.GetButtonUp("Restart"))
         {
@@ -35,19 +44,19 @@ public class PlayerController : MonoBehaviour
 
     private void MovementInput()
     {
-        if (Input.GetButton("Right") && canMove)
+        if (Input.GetButton("Right"))
         {
             Move(Vector2.right);
         }
-        else if (Input.GetButton("Left") && canMove)
+        else if (Input.GetButton("Left"))
         {
             Move(Vector2.left);
         }
-        else if (Input.GetButton("Up") && canMove)
+        else if (Input.GetButton("Up"))
         {
             Move(Vector2.up);
         }
-        else if (Input.GetButton("Down") && canMove)
+        else if (Input.GetButton("Down"))
         {
             Move(Vector2.down);
         }
@@ -75,5 +84,20 @@ public class PlayerController : MonoBehaviour
             }
         }
         transform.Translate(direction * speed * Time.smoothDeltaTime);
+    }
+
+    public IEnumerator MoveTo(Vector2 _direction)
+    {
+        float defaultSpeed = speed;
+        speed = transitionSpeed;
+        direction = _direction;
+
+        canControlMovement = false;
+        isBeingMoved = true;
+        yield return new WaitForSeconds(2f);
+
+        canControlMovement = true;
+        isBeingMoved = false;
+        speed = defaultSpeed;
     }
 }
