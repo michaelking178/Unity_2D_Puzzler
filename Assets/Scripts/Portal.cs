@@ -11,7 +11,7 @@ public class Portal : MonoBehaviour
     {
         if (col.tag == "Player")
         {
-            SceneManager.LoadScene(levelToLoad);
+            StartCoroutine(GameObject.FindObjectOfType<LevelManager>().LoadLevel(levelToLoad));
         }
     }
 }

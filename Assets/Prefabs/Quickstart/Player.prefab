@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55a047e22021334cab8b317eeb6638b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 1
-  speed: 5
-  colorEnum: 3
+  canControlMovement: 1
+  spriteRenderer: {fileID: 0}
+  speed: 4
   raycastDistance: 0.6

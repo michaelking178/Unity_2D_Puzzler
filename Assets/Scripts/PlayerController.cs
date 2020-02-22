@@ -100,4 +100,14 @@ public class PlayerController : MonoBehaviour
         isBeingMoved = false;
         speed = defaultSpeed;
     }
+
+    public void Freeze()
+    {
+        canControlMovement = false;
+    }
+
+    public void Unfreeze()
+    {
+        canControlMovement = true;
+    }
 }
