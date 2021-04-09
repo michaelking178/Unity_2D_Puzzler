@@ -58,5 +58,25 @@ namespace Tests
             Assert.IsTrue(playerController.transform.position.x > xPos);
             yield return null;
         }
+
+        [UnityTest]
+        public IEnumerator Freeze()
+        {
+            var gameObject = new GameObject();
+            var player = gameObject.AddComponent<PlayerController>();
+            player.Freeze();
+            Assert.IsFalse(player.canControlMovement);
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator Unfreeze()
+        {
+            var gameObject = new GameObject();
+            var player = gameObject.AddComponent<PlayerController>();
+            player.Unfreeze();
+            Assert.IsTrue(player.canControlMovement);
+            yield return null;
+        }
     }
 }

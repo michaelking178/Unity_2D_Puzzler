@@ -34,9 +34,11 @@ public class ColorManager : MonoBehaviour
         color1 = RoundColorValues(color1);
         color2 = RoundColorValues(color2);
 
-        List<Color> colorList = new List<Color>();
-        colorList.Add(color1);
-        colorList.Add(color2);
+        List<Color> colorList = new List<Color>()
+        {
+            color1,
+            color2
+        };
 
         if (colorList.Contains(blue))
         {
