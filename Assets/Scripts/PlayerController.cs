@@ -62,16 +62,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Move(Vector2 direction)
+    public void Move(Vector2 direction)
     {
         Vector2 startPosition = (Vector2)transform.position + raycastOffset;
         hit = Physics2D.Raycast(startPosition, direction, raycastDistance);
 
-        if (hit.collider && hit.collider.tag == "Wall")
+        if (hit.collider && hit.collider.CompareTag("Wall"))
         {
             return;
         }
-        else if (hit.collider && hit.collider.tag == "Door")
+        else if (hit.collider && hit.collider.CompareTag("Door"))
         {
             Door door = hit.collider.gameObject.GetComponent<Door>();
             if (door.color == spriteRenderer.color)
